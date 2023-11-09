@@ -1,17 +1,17 @@
-﻿using eCommerce.API.Infrastructure.Data;
+﻿using eCommerce.API.Features.Products.AddProduct.Data;
 using FluentValidation;
 using MediatR;
 
 namespace eCommerce.API.Features.Products.AddProduct;
 
-
 internal sealed class AddProductHandler : IRequestHandler<AddProductCommand, Guid>
 {
     private readonly IValidator<AddProductCommand> _validator;
-    private readonly IProductsRepository _productsRepository;
-    public AddProductHandler(IProductsRepository productsRepository, IValidator<AddProductCommand> validator)
+    private readonly IAddProductRepository _addProductRepository;
+
+    public AddProductHandler(IAddProductRepository addProductRepository, IValidator<AddProductCommand> validator)
     {
-        _productsRepository = productsRepository;
+        _addProductRepository = addProductRepository;
         _validator = validator;
     }
 
@@ -24,7 +24,7 @@ internal sealed class AddProductHandler : IRequestHandler<AddProductCommand, Gui
             {
                 throw new InvalidOperationException();
             }
-            var insertedId = await _productsRepository.AddProductAsync(request, cancellationToken);
+            var insertedId = await _addProductRepository.AddProductAsync(request, cancellationToken);
             return insertedId;
         }
         catch (Exception)

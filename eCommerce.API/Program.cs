@@ -1,6 +1,6 @@
 using Carter;
 using eCommerce.API.Behaviors;
-using eCommerce.API.Infrastructure;
+using eCommerce.API.Infrastructure.IoC;
 using FluentValidation;
 using MediatR;
 using Serilog;
@@ -14,7 +14,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddCarter();
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-builder.Services.AddInfrastructure();
+builder.Services.RegisterRepositories();
 
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));

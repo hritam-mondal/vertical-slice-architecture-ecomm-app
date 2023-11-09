@@ -1,14 +1,13 @@
-﻿using eCommerce.API.Features.Products.AddProduct;
-using Npgsql;
+﻿using Npgsql;
 using NpgsqlTypes;
 
-namespace eCommerce.API.Infrastructure.Data;
+namespace eCommerce.API.Features.Products.AddProduct.Data;
 
-public class ProductsRepository : IProductsRepository
+public class AddProductRepository : IAddProductRepository
 {
     private readonly string _connectionString;
 
-    public ProductsRepository(IConfiguration configuration)
+    public AddProductRepository(IConfiguration configuration)
     {
         _connectionString = configuration.GetConnectionString("Database")!;
     }
