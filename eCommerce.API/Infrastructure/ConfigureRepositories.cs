@@ -6,6 +6,6 @@ public static partial class ConfigureRepositories
 {
     public static void AddInfrastructure(this IServiceCollection services)
     {
-        services.AddScoped<ProductsRepository>();
+        services.AddScoped<IProductsRepository, ProductsRepository>();
     }
 }
